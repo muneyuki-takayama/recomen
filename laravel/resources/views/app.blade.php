@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./css/style.css">
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-    <title>RECOMEN!</title>
+    <title>
+      @yield('title')
+    </title>
 
   <!-- Scripts -->
   <script src="{{ mix('js/app.js') }}" defer></script>
@@ -15,7 +17,7 @@
 </head>
 <body>
   <div id="app">
-    
+    @yield('content')
   </div>
 </body>
 </html>

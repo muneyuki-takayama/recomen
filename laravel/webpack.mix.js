@@ -10,6 +10,19 @@ const mix = require('laravel-mix');
  |
  */
 
-    mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/style.scss', 'public/css')
-    .version();
+    mix
+    .webpackConfig({
+        module: {
+            rules: [
+                {
+                    test: /\.scss/,
+                    enforce: "pre",
+                    loader: "import-glob-loader"
+                }
+            ]
+        }
+    })
+        .js("resources/js/app.js", "public/js")
+        .sass("resources/sass/style.scss", "public/css")
+        .sourceMaps()
+        .version();
