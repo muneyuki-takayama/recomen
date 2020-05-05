@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('title', 'Edit')
+@section('title', 'RECOMEN! | Edit')
 
 @include('nav')
 
