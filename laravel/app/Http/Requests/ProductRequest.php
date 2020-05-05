@@ -26,9 +26,9 @@ class ProductRequest extends FormRequest
         return [
             'title' => 'required|max:30',
             'body' => 'required|max:500',
-            'pic1' => 'required|file|image|mimes:jpeg,png.jpg,gif|max:5120',
-            'pic2' => 'required|file|image|mimes:jpeg,png.jpg,gif|max:5120',
-            'pic3' => 'required|file|image|mimes:jpeg,png.jpg,gif|max:5120',
+            'pic1' => 'required|file|image|mimes:jpeg,png,jpg,gif|max:5120',
+            'pic2' => 'file|image|mimes:jpeg,png,jpg,gif|max:5120',
+            'pic3' => 'file|image|mimes:jpeg,png,jpg,gif|max:5120',
         ];
     }
 
@@ -41,6 +41,9 @@ class ProductRequest extends FormRequest
             'image' => '指定されたファイルが画像ではありません。',
             'mimes' => '指定された拡張子(PNG/JPG/GIF)ではありません。',
             'max' => '指定されたファイル容量(5M)を超えています。',
+            'pic1' => 'Image_1',
+            'pic2' => 'Image_2',
+            'pic3' => 'Image_3',
             
         ];
     }

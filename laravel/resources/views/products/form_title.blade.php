@@ -1,10 +1,10 @@
 <div class="">
     <div>
         <label>Title</label>
-        <input type="text" name="title" class="" required value="{{ old('title') }}">
+        <input type="text" name="title" class="" required value="{{ $product->title ?? old('title') }}">
     </div>
     <div class="">
         <label>Comment</label>
-        <textarea name="body" class="" rows="16" placeholder="Write your comment">{{ old('comment') }}</textarea>
+        <textarea name="body" class="" rows="16" placeholder="Write your comment">{{ $product->body ?? old('comment') }}</textarea>
     </div>
 </div>

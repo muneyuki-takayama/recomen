@@ -42,4 +42,24 @@ class ProductController extends Controller
 
         return redirect()->route('products.index');
     }
+
+    public function edit(Product $product)
+    {
+        return view('products.edit', ['product' => $product]);
+    }
+
+    public function update(ProductRequest $request, Product $product)
+    {
+     $product->fill($request->all());
+
+     //ここに画像の更新ロジックも記述する。
+
+     $product->save();
+    }
+
+    public function destroy(Product $product)
+    {
+        $product->delete();
+        return redirect()->route('products.index');
+    }
 }
