@@ -31,7 +31,10 @@
             {{ $product->title }}
         </a>
             <div>
-                <product-like>
+                <product-like
+                :initial-is-liked-by='@json($product->isLikedBy(Auth::user()))'
+                :initial-count-likes='@json($product->count_likes)'
+                >
                 </product-like>
             </div>
         </div>
