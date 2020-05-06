@@ -31,7 +31,8 @@
             {{ $product->title }}
         </a>
             <div>
-            <p>いいねボタン</p>
+                <product-like>
+                </product-like>
             </div>
         </div>
     </div>

@@ -25,7 +25,11 @@
 
             <input type="hidden" name="remember" id="remember" value="on">
 
-            <button class="">Login</button>
+            <div class="">
+            <a href="{{ route('password.request') }}">Forgot Password</a>
+            </div>
+
+            <button class="" type="submit">Login</button>
         </form>
 
         <div class="">
