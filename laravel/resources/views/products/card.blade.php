@@ -34,6 +34,8 @@
                 <product-like
                 :initial-is-liked-by='@json($product->isLikedBy(Auth::user()))'
                 :initial-count-likes='@json($product->count_likes)'
+                :authorized='@json(Auth::user())'
+                endpoint="{{ route('products.like', ['product' => $product]) }}"
                 >
                 </product-like>
             </div>

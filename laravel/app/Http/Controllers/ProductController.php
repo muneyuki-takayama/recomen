@@ -80,4 +80,25 @@ class ProductController extends Controller
         return view('products.show', ['product' => $product]);
     }
 
+    public function like(Request $request, Product $product)
+    {
+        $product->likes()->detach($request->user()->id);
+        $product->likes()->attach($request->user()->id);
+
+        return [
+            'id' => $product->id,
+            'countLikes' => $product->count_likes,
+        ];
+    }
+
+    public function unlike(Request $request, Product $product)
+    {
+        $product->likes()->detach($request->user()->id);
+
+        return [
+            'id' => $product->id,
+            'countLikes' => $product->count_likes,
+        ];
+    }
+
 }
