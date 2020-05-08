@@ -7,7 +7,7 @@
             {{ $product->created_at->format('Y/n/j H:i') }}
         </div>
 
-        <!-- ログインしているユーザーのみ表示される -->
+        <!-- 自分の投稿した記事のみ表示される -->
         @if(Auth::id() === $product->user_id)
         <div>
             <a href="{{ route('products.edit', ['product'=> $product]) }}">
@@ -24,7 +24,7 @@
             
         </div>
         @endif
-        <!-- ログインしているユーザーのみ表示される -->
+        <!-- 自分の投稿した記事のみ表示される -->
 
         <div>
         <a href="{{ route('products.show', ['product' => $product]) }}">
@@ -38,6 +38,21 @@
                 endpoint="{{ route('products.like', ['product' => $product]) }}"
                 >
                 </product-like>
+            </div>
+            <div class="tag-container">
+                @foreach ($product->tags as $tag)
+                    @if($loop->first)
+                    <div>
+                        <div>
+                    @endif
+                        <a href="{{ route('tags.show', ['name' => $tag->name]) }}">
+                                {{ $tag->hashtag}}
+                            </a>
+                    @if($loop->last)
+                        </div>
+                    </div>
+                    @endif
+                @endforeach
             </div>
         </div>
     </div>

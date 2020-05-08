@@ -7,8 +7,23 @@
 <div class="">
     <div class="">
         <div>
-            画像表示領域
-            ＋タグもここに表示
+           -- 画像表示領域 --
+
+            <div class="tag-container">
+                @foreach ($product->tags as $tag)
+                    @if($loop->first)
+                    <div>
+                        <div>
+                    @endif
+                            <a href="">
+                                {{ $tag->hashtag}}
+                            </a>
+                    @if($loop->last)
+                        </div>
+                    </div>
+                    @endif
+                @endforeach
+            </div>
         </div>
         <div>
         <span>{{ $product->user->name }}</span>
@@ -18,10 +33,19 @@
             {{ $product->title }}
             {{ $product->body}}
 
-            <span>TW/FB</span>
-            <span>いいいねボタン</span>
+            <div>FB/TW</div>
+            <div class="">
+                <product-like
+                :initial-is-liked-by='@json($product->isLikedBy(Auth::user()))'
+                :initial-count-likes='@json($product->count_likes)'
+                :authorized='@json(Auth::user())'
+                endpoint="{{ route('products.like', ['product' => $product]) }}"
+                >
+                </product-like>
+            </div>
         </div>
 
     </div>
 
 </div>
+@endsection

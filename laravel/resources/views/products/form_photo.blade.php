@@ -15,5 +15,13 @@
             <span>Image_3</span>
         </div>
     </div>
-    //ここにタグを表示
+    
+    <div>
+        <product-tags-input
+        :initial-tags = '@json($tagNames ?? [])'
+        :autocomplete-items='@json($allTagNames ?? [])'
+        >
+        </product-tags-input>
+    </div>
+    
 </div>

@@ -29,6 +29,7 @@ class ProductRequest extends FormRequest
             'pic1' => 'required|file|image|mimes:jpeg,png,jpg,gif|max:5120',
             'pic2' => 'file|image|mimes:jpeg,png,jpg,gif|max:5120',
             'pic3' => 'file|image|mimes:jpeg,png,jpg,gif|max:5120',
+            'tags' => 'json|regex:/^(?!.*\s).+$/u'
         ];
     }
 
@@ -44,7 +45,17 @@ class ProductRequest extends FormRequest
             'pic1' => 'Image_1',
             'pic2' => 'Image_2',
             'pic3' => 'Image_3',
+            'tags' => 'タグ',
             
         ];
+    }
+
+    public function passedValidation()
+    {
+        $this->tags = collect(json_decode($this->tags))
+            ->slice(0, 5)
+            ->map(function ($requestTag) {
+                return $requestTag->text;
+            });
     }
 }

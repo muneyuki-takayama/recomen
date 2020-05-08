@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Tag;
 use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
@@ -24,7 +25,13 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('products.create');
+        $allTagNames = Tag::all()->map(function ($tag) {
+            return ['text' => $tag->name];
+        });
+
+        return view('products.create', [
+            'allTagNames' => $allTagNames,
+        ]);
     }
 
     public function store(ProductRequest $request, Product $product)
@@ -52,12 +59,29 @@ class ProductController extends Controller
         
         $product->save();
 
+        $request->tags->each(function ($tagName) use ($product) {
+            $tag = Tag::firstOrCreate(['name' => $tagName]);
+            $product->tags()->attach($tag);
+        });
+
         return redirect()->route('products.index');
     }
 
     public function edit(Product $product)
     {
-        return view('products.edit', ['product' => $product]);
+        $tagNames = $product->tags->map(function ($tag) {
+            return ['text' => $tag->name];
+        });
+
+        $allTagNames = Tag::all()->map(function ($tag) {
+            return ['text' => $tag->name];
+        });
+
+        return view('products.edit' , [
+            'product' => $product,
+            'tagNames' => $tagNames,
+            'allTagNames' => $allTagNames,
+        ]);
     }
 
     public function update(ProductRequest $request, Product $product)
@@ -66,7 +90,15 @@ class ProductController extends Controller
 
      //ここに画像の更新ロジックも記述する。
 
+      $product->tags()->detach();
+      $request->tags->each(function ($tagName) use ($product) {
+            $tag = Tag::firstOrCreate(['name' => $tagName]);
+            $product->tags()->attach($tag);
+      });
+
      $product->save();
+
+     return redirect()->route('products.index');
     }
 
     public function destroy(Product $product)
@@ -100,5 +132,6 @@ class ProductController extends Controller
             'countLikes' => $product->count_likes,
         ];
     }
+
 
 }
