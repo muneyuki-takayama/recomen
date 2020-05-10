@@ -1,7 +1,14 @@
 <div class="" style="width: 200px; height: 200px; padding: 30px">
         
         <div>
-            {{ $product->user->name }}
+            <a href="{{ route('users.show', ['name' => $product->user->name]) }}">
+                <i class="fas fa-user-circle fa-3x"></i>
+            </a> 
+        </div>
+        <div>
+            <a href="{{ route('users.show', ['name' => $product->user->name]) }}">
+                {{ $product->user->name }}
+            </a>  
         </div>
         <div>
             {{ $product->created_at->format('Y/n/j H:i') }}
@@ -34,7 +41,7 @@
                 <product-like
                 :initial-is-liked-by='@json($product->isLikedBy(Auth::user()))'
                 :initial-count-likes='@json($product->count_likes)'
-                :authorized='@json(Auth::user())'
+                :authorized='@json(Auth::check())'
                 endpoint="{{ route('products.like', ['product' => $product]) }}"
                 >
                 </product-like>

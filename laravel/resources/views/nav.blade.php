@@ -17,13 +17,13 @@
     @auth
     <ul>
          <li>
-         <a href="{{ route('products.create') }}">Post</a>
+            <a href="{{ route('products.create') }}">Post</a>
         </li>
         <li>
             <a href="javascript:logout.submit()">Logout</a>
         </li>
          <li>
-            <a href="">Mypage</a>
+            <a href="{{ route('users.show', ['name' => Auth::user()->name] )}}">Mypage</a>
         </li>
          <li>
             <a href="">Tag Search</a>

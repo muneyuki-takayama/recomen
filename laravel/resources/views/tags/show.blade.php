@@ -3,6 +3,8 @@
 @section('title', $tag->hashtag)
 
 @section('content')
+
+@include('nav')
     <div>
         <div>
             <h2>{{ $tag->hashtag}}</h2>
