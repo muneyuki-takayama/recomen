@@ -6,6 +6,9 @@
     @include('nav')
 
     <h2>ユーザー登録</h2>
+    <a href="{{ route('login.{provider}', ['provider' => 'google']) }}" style="color: red;">
+        <i class="fab fa-google">Googleでログイン</i>
+    </a>
 
     @include('error_message')
 
