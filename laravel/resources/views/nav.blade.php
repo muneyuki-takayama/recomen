@@ -26,7 +26,7 @@
             <a href="{{ route('users.show', ['name' => Auth::user()->name] )}}">Mypage</a>
         </li>
          <li>
-            <a href="">Tag Search</a>
+         <a href="{{ route('tags.search') }}">Tag Search</a>
         </li>
         <form name="logout" method="POST" action="{{ route('logout') }}" >
             @csrf
