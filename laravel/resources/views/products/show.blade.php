@@ -35,8 +35,6 @@
         </div>
         <div>
         <span>{{ $product->user->name }}</span>
-        <span>+フォロー</span>
-
 
             {{ $product->title }}
             {{ $product->body}}

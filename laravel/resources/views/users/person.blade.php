@@ -12,7 +12,7 @@
           endpoint="{{ route('users.follow', ['name' => $person->name]) }}"
         >
         </follow-button>
-      @endif
+    @endif
  
     </div>
     <h2>

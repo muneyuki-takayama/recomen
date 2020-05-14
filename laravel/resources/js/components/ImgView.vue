@@ -20,11 +20,30 @@ export default {
         selectPicThird: {
             type: String,
         },
+        imgDataFirst: {
+            type: String,
+        },
+        imgDataSecond: {
+            type: String,
+        },
+        imgDataThird: {
+            type: String,
+        },
     },
     data() {
         return {
             uploadedImage: '',
         }
+    },
+    mounted() {
+        if(this.imgDataFirst) {
+            return this.uploadedImage = this.imgDataFirst;
+        }else if(this.imgDataSecond){
+            return this.uploadedImage = this.imgDataSecond;
+        }else{
+            return this.uploadedImage = this.imgDataThird;
+        }
+    
     },
     methods: {
         onFileChange(e) {
