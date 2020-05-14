@@ -5,6 +5,6 @@
     </div>
     <div class="">
         <label>Comment</label>
-        <textarea name="body" class="" rows="16" placeholder="Write your comment">{{ $product->body ?? old('comment') }}</textarea>
+        <textarea name="body" class="" rows="16" placeholder="Write your comment">{{ $product->body ?? old('body') }}</textarea>
     </div>
 </div>

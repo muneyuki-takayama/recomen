@@ -46,7 +46,6 @@ class ProductRequest extends FormRequest
             'pic2' => 'Image_2',
             'pic3' => 'Image_3',
             'tags' => 'タグ',
-            
         ];
     }
 

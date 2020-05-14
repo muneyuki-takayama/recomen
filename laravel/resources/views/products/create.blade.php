@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('title', 'RECOMEN! | Register')
+@section('title', 'RECOMEN! | Post')
 
 @include('nav')
 

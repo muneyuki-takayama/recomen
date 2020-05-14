@@ -6,6 +6,11 @@
             </a> 
         </div>
         <div>
+            <a href="{{ route('products.show', ['product' => $product]) }}">
+                <img src="{{ $product->pic1}}" alt="">
+            </a>
+        </div>
+        <div>
             <a href="{{ route('users.show', ['name' => $product->user->name]) }}">
                 {{ $product->user->name }}
             </a>  

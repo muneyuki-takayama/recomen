@@ -7,7 +7,15 @@
 <div class="">
     <div class="">
         <div>
-           -- 画像表示領域 --
+           <div>
+                <img src="{{ $product->pic1}}" alt="">
+                @if($product->pic2)
+                    <img src="{{ $product->pic2}}" alt="">
+                @endif
+                @if($product->pic3)
+                    <img src="{{ $product->pic3}}" alt="">
+                @endif
+           </div>
 
             <div class="tag-container">
                 @foreach ($product->tags as $tag)
