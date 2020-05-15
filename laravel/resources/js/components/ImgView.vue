@@ -20,6 +20,9 @@ export default {
         selectPicThird: {
             type: String,
         },
+        selectUserProf: {
+            type: String,
+        },
         imgDataFirst: {
             type: String,
         },
@@ -27,6 +30,9 @@ export default {
             type: String,
         },
         imgDataThird: {
+            type: String,
+        },
+        imgDataUserProf: {
             type: String,
         },
     },
@@ -40,8 +46,10 @@ export default {
             return this.uploadedImage = this.imgDataFirst;
         }else if(this.imgDataSecond){
             return this.uploadedImage = this.imgDataSecond;
-        }else{
+        }else if(this.imgDataThird){
             return this.uploadedImage = this.imgDataThird;
+        }else{
+            return this.uploadedImage = this.imgDataUserProf;
         }
     
     },
@@ -66,8 +74,10 @@ export default {
                    return this.selectPicFirst;
                }else if(this.selectPicSecond) {
                    return this.selectPicSecond;
-               }else{
+               }else if(this.selectPicThird){
                    return this.selectPicThird;
+               }else{
+                   return this.selectUserProf;
                }
            }
     },

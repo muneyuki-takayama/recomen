@@ -1,7 +1,10 @@
         <div>
             <div>
             <a href="{{ route('users.show', ['name' => $user->name]) }}">
-                <i class="fas fa-user-circle fa-3x"></i>
+                @if(!$user->profile_photo) 
+                    <i class="fas fa-user-circle fa-3x"></i>
+                @endif  
+                <img src="{{ $user->profile_photo }}" alt="">
             </a>
             </div>
             <div>
@@ -10,9 +13,11 @@
                 </h2>
             </div>
             <div>
-                自己紹介の部分
+                {{  $user->profile_body }}
             </div>
-            <button style="color: red;">プロフィール編集(モーダル編集)</button>
+            <a href="{{ route('users.edit', ['name' => $user->name]) }}">
+                <button>Edit Profile</button>
+            </a>
         </div>
 
         <div>

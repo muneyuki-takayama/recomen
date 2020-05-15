@@ -1,8 +1,11 @@
-<div class="" style="width: 200px; height: 200px; padding: 30px">
+<div class="" style="width: 200px; height: 200px; padding: 40px;">
         
         <div>
             <a href="{{ route('users.show', ['name' => $product->user->name]) }}">
+            @if(!$product->user->profile_photo) 
                 <i class="fas fa-user-circle fa-3x"></i>
+            @endif    
+            <img src="{{ $product->user->profile_photo}}" alt="">
             </a> 
         </div>
         <div>

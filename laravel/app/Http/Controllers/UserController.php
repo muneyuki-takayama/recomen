@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -16,6 +18,25 @@ class UserController extends Controller
             'user' => $user,
             'products' => $products,
         ]);
+    }
+
+    public function edit(string $name)
+    {
+        $user = User::where('name', $name)->first();
+
+        return view('users.edit', ['user' => $user]);
+    }
+
+    public function update(UserRequest $request, User $user)
+    {
+        $user->fill($request->all());
+
+        $image_prof = $request->file('profile_photo');
+        $path = Storage::disk('s3')->putFile('recomen', $image_prof, 'public');
+        $user->profile_photo = Storage::disk('s3')->url($path);
+
+        $user->save();
+        return redirect()->route('users.show');
     }
 
     public function likes(string $name)

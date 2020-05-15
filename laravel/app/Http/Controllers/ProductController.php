@@ -86,7 +86,7 @@ class ProductController extends Controller
 
     public function update(ProductRequest $request, Product $product)
     {
-     $product->fill($request->all());
+        $product->fill($request->all());
 
         $image_1 = $request->file('pic1');
         $path1 = Storage::disk('s3')->putFile('recomen', $image_1, 'public');
