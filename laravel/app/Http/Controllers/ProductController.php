@@ -6,6 +6,7 @@ use App\Tag;
 use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -39,22 +40,34 @@ class ProductController extends Controller
         $product->fill($request->all());
         $product->user_id = $request->user()->id;
 
-        $image_1 = $request->file('pic1');
-        $path1 = Storage::disk('s3')->putFile('recomen', $image_1, 'public');
-        $product->pic1 = Storage::disk('s3')->url($path1);
+        function resizeUpload($request, $product, $fileNum) {
+            $image = $request->file($fileNum);
+            $extension = $request->file($fileNum)->getClientOriginalExtension();
+            $filename = $request->file($fileNum)->getClientOriginalName();
+            $hash = md5($filename);
 
-        if(($request->file('pic2')))
-        {
-            $image_2 = $request->file('pic2');
-            $path2 = Storage::disk('s3')->putFile('recomen', $image_2, 'public');
-            $product->pic2 = Storage::disk('s3')->url($path2);
+            $resize_img = Image::make($image)
+                    ->resize(300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->encode($extension);
+
+            Storage::disk('s3')->put($hash, $resize_img, 'public');
+            $product->$fileNum = Storage::disk('s3')->url($hash);
         }
 
-        if(($request->file('pic3')))
+        if($request->file('pic1'))
         {
-            $image_3 = $request->file('pic3');
-            $path3 = Storage::disk('s3')->putFile('recomen', $image_3, 'public');
-            $product->pic3 = Storage::disk('s3')->url($path3);
+            resizeUpload($request, $product, 'pic1');
+        }
+
+        if($request->file('pic2'))
+        {
+            resizeUpload($request, $product, 'pic2');
+        }
+
+        if($request->file('pic3'))
+        {
+            resizeUpload($request, $product, 'pic3');
         }
         
         $product->save();
@@ -88,22 +101,34 @@ class ProductController extends Controller
     {
         $product->fill($request->all());
 
-        $image_1 = $request->file('pic1');
-        $path1 = Storage::disk('s3')->putFile('recomen', $image_1, 'public');
-        $product->pic1 = Storage::disk('s3')->url($path1);
+        function resizeUpload($request, $product, $fileNum) {
+            $image = $request->file($fileNum);
+            $extension = $request->file($fileNum)->getClientOriginalExtension();
+            $filename = $request->file($fileNum)->getClientOriginalName();
+            $hash = md5($filename);
 
-        if(($request->file('pic2')))
-        {
-            $image_2 = $request->file('pic2');
-            $path2 = Storage::disk('s3')->putFile('recomen', $image_2, 'public');
-            $product->pic2 = Storage::disk('s3')->url($path2);
+            $resize_img = Image::make($image)
+                    ->resize(300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->encode($extension);
+
+            Storage::disk('s3')->put($hash, $resize_img, 'public');
+            $product->$fileNum = Storage::disk('s3')->url($hash);
         }
 
-        if(($request->file('pic3')))
+        if($request->file('pic1'))
         {
-            $image_3 = $request->file('pic3');
-            $path3 = Storage::disk('s3')->putFile('recomen', $image_3, 'public');
-            $product->pic3 = Storage::disk('s3')->url($path3);
+            resizeUpload($request, $product, 'pic1');
+        }
+
+        if($request->file('pic2'))
+        {
+            resizeUpload($request, $product, 'pic2');
+        }
+
+        if($request->file('pic3'))
+        {
+            resizeUpload($request, $product, 'pic3');
         }
 
       $product->tags()->detach();

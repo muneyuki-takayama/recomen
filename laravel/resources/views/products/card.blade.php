@@ -30,6 +30,7 @@
             </a>
         </div>
         <div>
+            
             <!-- ここはモーダルで表示すること -->
             <form method="POST" action="{{ route('products.destroy', ['product' => $product]) }}">
             @csrf

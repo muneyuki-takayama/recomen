@@ -9,7 +9,7 @@
             <a href="{{ route('register') }}">Register</a>
         </li>
         <li>
-            <a href="">Tag Search</a>
+            <a href="{{ route('tags.search') }}">Tag Search</a>
         </li>
     </ul>
     @endguest

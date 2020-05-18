@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -31,12 +32,26 @@ class UserController extends Controller
     {
         $user->fill($request->all());
 
-        $image_prof = $request->file('profile_photo');
-        $path = Storage::disk('s3')->putFile('recomen', $image_prof, 'public');
-        $user->profile_photo = Storage::disk('s3')->url($path);
+        if($request->file('profile_photo')) {
 
+        $image_prof = $request->file('profile_photo');
+        $extension = $request->file('profile_photo')->getClientOriginalExtension();
+        $filename = $request->file('profile_photo')->getClientOriginalName();
+        $hash = md5($filename);
+
+        $resize_img = Image::make($image_prof)
+                    ->resize(300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->encode($extension);
+                
+        Storage::disk('s3')->put($hash, $resize_img, 'public');
+
+        $user->profile_photo = Storage::disk('s3')->url($hash);
+        
+        }
+        
         $user->save();
-        return redirect()->route('users.show');
+        return redirect()->route('users.show',['name' => $user->name]);
     }
 
     public function likes(string $name)

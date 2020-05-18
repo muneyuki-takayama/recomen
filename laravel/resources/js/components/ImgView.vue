@@ -1,9 +1,10 @@
 <template>
     <label>
         <div>
-            <input type="file" id="" :name="picNum" @change="onFileChange"> 
+            <input type="file" ref="file" id="" :name="picNum" @change="onFileChange"> 
             <i aria-hidden="true" class="fas fa-plus fa-7x"></i>
             <img :src="uploadedImage" alt="" v-show="uploadedImage">
+            <button v-if="uploadedImage" @click="resetFile">Reset Image</button>
         </div>
     </label>
 </template>
@@ -66,7 +67,13 @@ export default {
 
             reader.readAsDataURL(file);
         },
-        
+        resetFile() {
+            const input = this.$refs.file;
+            input.type = 'text';
+            input.type = 'file';
+            this.uploadedImage = '';
+
+        },
      },
     computed: {
            picNum() {
