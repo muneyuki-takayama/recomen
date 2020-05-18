@@ -4,6 +4,7 @@ import ProductLike from './components/ProductLike'
 import ProductTagsInput from './components/ProductTagsInput'
 import FollowButton from './components/FollowButton'
 import ImgView from './components/ImgView'
+import Modal from './components/Modal'
 
 new Vue({
     el: '#app',
@@ -12,5 +13,6 @@ new Vue({
         ProductTagsInput,
         FollowButton,
         ImgView,
+        Modal,
     }
 })

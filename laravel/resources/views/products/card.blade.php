@@ -35,7 +35,10 @@
             <form method="POST" action="{{ route('products.destroy', ['product' => $product]) }}">
             @csrf
             @method('DELETE')
-            <button type="submit">Delete</button>
+            <modal
+            delete-data-name="{{ $product->title ?? '' }}"
+            >
+            </modal>
             </form>
             
         </div>
