@@ -173,6 +173,4 @@ class ProductController extends Controller
             'countLikes' => $product->count_likes,
         ];
     }
-
-
 }

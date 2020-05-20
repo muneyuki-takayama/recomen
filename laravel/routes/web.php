@@ -13,6 +13,7 @@ Route::prefix('products')->name('products.')->group(function () {
     Route::put('/{product}/like', 'ProductController@like')->name('like')->middleware('auth');
     Route::delete('/{product}/like', 'ProductController@unlike')->name('unlike')->middleware('auth');
 });
+
 Route::prefix('register')->name('register.')->group(function () {
     Route::get('/{provider}', 'Auth\RegisterController@showProviderUserRegistrationForm')->name('{provider}');
     Route::post('/{provider}', 'Auth\RegisterController@registerProviderUser');

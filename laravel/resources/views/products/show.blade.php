@@ -39,7 +39,13 @@
             {{ $product->title }}
             {{ $product->body}}
 
-            <div>FB/TW</div>
+            <div>
+            <a href="https://twitter.com/share?url={{ url()->current() }}&text={{ $product->title }}" rel="nofollow" target="_blank">
+                <i class="fab fa-twitter"></i>
+            </a>
+                                    
+            </div>
+
             <div class="">
                 <product-like
                 :initial-is-liked-by='@json($product->isLikedBy(Auth::user()))'

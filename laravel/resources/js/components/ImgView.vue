@@ -36,6 +36,9 @@ export default {
         imgDataUserProf: {
             type: String,
         },
+        endpoint: {
+            type: String,
+        }
     },
     data() {
         return {
