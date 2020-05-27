@@ -1,0 +1,51 @@
+.l-wrapper {
+    padding: 120px $space_m 80px;
+
+    @include mq() {
+        padding: 150px 5% 80px;
+    }
+}
+
+.l-container {
+    width: 100%;
+    margin: 0 auto;
+
+    @include mq() {
+        max-width: 2000px;
+    }
+}
+
+.l-card {
+    width: calc((100%-20px) / 2);
+
+    @include mq() {
+        width: calc((100% - #{$pd-x-pc-l}) / 3);
+    }
+}
+
+.l-container--form {
+    width: 100%;
+    max-width: $layout-width-form-container;
+    margin: 0 auto;
+    padding: 0 $pd-x-sp;
+
+    @include mq() {
+        padding: 0 $pd-x-pc;
+    }
+}
+
+.l-photo--form {
+    width: 100%;
+
+    @include mq() {
+        width: calc((100% - #{$pd-x-pc-l}) 2 / 3);
+    }
+}
+
+.l-title--form {
+    width: 100%;
+
+    @include mq() {
+        width: calc((100% - #{$pd-x-pc-l}) / 3);
+    }
+}
